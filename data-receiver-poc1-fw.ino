@@ -5,10 +5,6 @@
 #define rst 16
 #define dio0 2
 
-int counter = 0;
-float t = 0;
-int h = 0;
- 
 void setup() 
 {
   Serial.begin(9600); 
@@ -22,7 +18,9 @@ void setup()
       Serial.println("Starting LoRa failed!");
       delay(100);
       while (1);
-    }  
+    } 
+
+  Serial.println("Rain_status,temperature,humidity");
 }
 
 void loop() 
@@ -33,15 +31,13 @@ void loop()
   if (packetSize) 
   {
     // received a paket
-    Serial.println("Received packet '");
-    // read packet
-    Serial.println("\n");
-    while (LoRa.available()) 
+   
+     while (LoRa.available()) 
     {
       char incoming = (char)LoRa.read();
       if (incoming == 'c')
       {
-        Serial.print("\r");
+        Serial.print("\r\n");
       }
       else
       {
